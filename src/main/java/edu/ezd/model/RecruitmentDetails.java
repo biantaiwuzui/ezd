@@ -9,6 +9,7 @@ public class RecruitmentDetails {
     private String jobRequirements;      //工作要求
     private String genderRequirements;   //性别要求
     private String educationalRequirements;  //学历要求
+    private String experienceRequirements; // 经验要求
     private String companyBenefits; //公司福利（五险一金）
     private String jobContent;   //工作内容
     private String salary;   //薪水
@@ -103,5 +104,13 @@ public class RecruitmentDetails {
 
     public void setRecruitmentDetailsType(RecruitmentDetailsType recruitmentDetailsType) {
         this.recruitmentDetailsType = recruitmentDetailsType;
+    }
+
+    public String getExperienceRequirements() {
+        return experienceRequirements;
+    }
+
+    public void setExperienceRequirements(String experienceRequirements) {
+        this.experienceRequirements = experienceRequirements;
     }
 }
