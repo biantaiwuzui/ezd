@@ -22,7 +22,7 @@
         <association property="enterprise"  resultMap="edu.ezd.dao.EnterpriseDao.enterprise"></association>
         <association property="positionName"  resultMap="edu.ezd.dao.PositionNameDao.positionName"></association>
         <!--  一对多关联 -->
-        <association property="recruitmentDetailss" resultMap="edu.ezd.dao.RecruitmentDetailsDao.recruitmentDetails" ></association>
+        <association property="recruitmentDetails" resultMap="edu.ezd.dao.RecruitmentDetailsDao.recruitmentDetails" ></association>
         <collection property="postBrowses" resultMap="edu.ezd.dao.PostBrowseDao.postBrowse"></collection>
     </resultMap>
 
