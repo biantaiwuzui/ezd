@@ -43,6 +43,48 @@ public class PostService {
         return posts;
     }
 
+    public List<Post> addressPost(String address){
+        List<Post> posts = postDao.getAddressPost(address);
+        for (Post p : posts){
+            Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
+            RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
+            List<PostBrowse> postBrowses = postBrowseDao.getSome(p.getPostId());
+            p.setEnterprise(enterprise);
+            p.setRecruitmentDetails(recruitmentDetails);
+            p.setPostBrowses(postBrowses);
+
+        }
+        return posts;
+    }
+
+    public List<Post> descPost(String desc){
+        List<Post> posts = postDao.getDescPost(desc);
+        for (Post p : posts){
+            Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
+            RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
+            List<PostBrowse> postBrowses = postBrowseDao.getSome(p.getPostId());
+            p.setEnterprise(enterprise);
+            p.setRecruitmentDetails(recruitmentDetails);
+            p.setPostBrowses(postBrowses);
+
+        }
+        return posts;
+    }
+
+    public List<Post> salaryPost(double minsalary,double maxsalary){
+        List<Post> posts = postDao.getSalaryPost(minsalary,maxsalary);
+        for (Post p : posts){
+            Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
+            RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
+            List<PostBrowse> postBrowses = postBrowseDao.getSome(p.getPostId());
+            p.setEnterprise(enterprise);
+            p.setRecruitmentDetails(recruitmentDetails);
+            p.setPostBrowses(postBrowses);
+
+        }
+        return posts;
+    }
+
     public Post getPostInfo(int postId){
         Post post = postDao.getPostInfo(postId);
         Enterprise enterprise = enterpriseDao.getEnterprise(post.getEnterpriseId());

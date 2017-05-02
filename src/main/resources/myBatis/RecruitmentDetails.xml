@@ -15,6 +15,8 @@
         <result property="educationalRequirements" column="educationalRequirements" />
         <result property="jobContent" column="jobContent" />
         <result property="salary" column="salary" />
+        <result property="minsalary" column="minsalary" />
+        <result property="maxsalary" column="maxsalary" />
         <result property="jobType" column="jobType" />
         <result property="experienceRequirements" column="experienceRequirements" />
         <result property="postId" column="postId" />

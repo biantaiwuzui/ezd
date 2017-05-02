@@ -42,7 +42,7 @@
             ezd_post
         WHERE  status = 0
     </select>
-
+    <!-- 查看详情 -->
     <select id="getPostInfo" parameterType="int" resultType="post">
 	   SELECT
            postId,
@@ -58,7 +58,7 @@
             ezd_post
 		WHERE postId = #{postId} and  status = 0
     </select>
-
+    <!-- 根据企业id查询 -->
     <select id="getEnterprisePost" parameterType="int" resultType="post">
         SELECT
            postId,
@@ -73,6 +73,95 @@
         FROM
             ezd_post
 		WHERE company = #{enterpriseid} and  status = 0
+    </select>
+
+    <!-- 根据地址查找 -->
+    <select id="getAddressPost" parameterType="String" resultType="post">
+        select
+            p.postId,
+            p.post_title,
+            p.sendPostDate,
+            p.contacts,
+            p.contactInformation,
+            p.recruitmentNumber,
+            p.position_name positionNameId,
+            p.company enterpriseid,
+            p.status
+        from ezd.ezd_post p
+        join ezd.ezd_enterprise e
+        on p.company = e.enterpriseId
+        WHERE e.enterpriseAddress  like concat(concat('%',#{address}),'%')
+
+    </select>
+
+
+    <!-- 根据地工资查找 -->
+    <select id="getSalaryPost" parameterType="double" resultType="post">
+        SELECT
+            p.postId,
+            p.post_title,
+            p.sendPostDate,
+            p.contacts,
+            p.contactInformation,
+            p.recruitmentNumber,
+            p.position_name positionNameId,
+            p.company enterpriseid,
+            p.status
+        FROM
+        ezd_post p
+        JOIN ezd_recruitmentdetails r ON p.postId = r.postId
+        WHERE
+        r.minsalary &gt;= #{0}
+        AND r.maxsalry &lt;= #{1}
+
+    </select>
+
+    <!-- 排序查找 -->
+    <select id="getDescPost" parameterType="String" resultType="post">
+        <if test="desc =='最新发布' ">
+            select
+                postId,
+                post_title,
+                sendPostDate,
+                contacts,
+                contactInformation,
+                recruitmentNumber,
+                position_name positionNameId,
+                company enterpriseid,
+                status
+            from ezd.ezd_post
+            order by sendPostDate desc
+        </if>
+        <if test="desc == '查看最多' ">
+            SELECT
+                p.postId,
+                p.post_title,
+                p.sendPostDate,
+                p.contacts,
+                p.contactInformation,
+                p.recruitmentNumber,
+                p.position_name positionNameId,
+                p.company enterpriseid,
+                p.status
+            FROM
+                ezd_post p,
+            (
+            SELECT
+                p.postId,
+                count(*) look
+            FROM
+                ezd_post p,
+                ezd_postbrowse pb
+            WHERE
+                p.postId = pb.postId
+            GROUP BY
+                p.postId
+            ) looks
+            WHERE
+                p.postId = looks.postId
+            ORDER BY
+                looks.look DESC;
+        </if>
     </select>
 
 </mapper>
