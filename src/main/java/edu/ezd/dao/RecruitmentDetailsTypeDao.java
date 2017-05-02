@@ -11,6 +11,8 @@ public interface RecruitmentDetailsTypeDao {
 
     List<RecruitmentDetailsType> findAll();
 
+    RecruitmentDetailsType getOne(int recruitmentDetailsTypeId);
+
     void save(RecruitmentDetailsType recruitmentDetailsType);
 
     void update(RecruitmentDetailsType recruitmentDetailsType);

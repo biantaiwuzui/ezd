@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface EnterpriseTypeDao {
     List<EnterpriseType> findAll();
+
+    EnterpriseType getEnterpriseType(int enterpriseTypeId);
 }

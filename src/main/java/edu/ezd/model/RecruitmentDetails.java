@@ -9,11 +9,15 @@ public class RecruitmentDetails {
     private String jobRequirements;      //工作要求
     private String genderRequirements;   //性别要求
     private String educationalRequirements;  //学历要求
+    private String experienceRequirements; // 经验要求
     private String companyBenefits; //公司福利（五险一金）
     private String jobContent;   //工作内容
-    private String salary;   //薪水
+    private String salary;   //薪水(废弃)
+    private int minsalary;//最低薪水
+    private int maxsalary;//最高薪水
     private int jobType;
     private int postId;
+
     private Post post;  //关联的招聘信息表
     private RecruitmentDetailsType recruitmentDetailsType; //工作类型（实习或全职）
 
@@ -103,5 +107,29 @@ public class RecruitmentDetails {
 
     public void setRecruitmentDetailsType(RecruitmentDetailsType recruitmentDetailsType) {
         this.recruitmentDetailsType = recruitmentDetailsType;
+    }
+
+    public String getExperienceRequirements() {
+        return experienceRequirements;
+    }
+
+    public void setExperienceRequirements(String experienceRequirements) {
+        this.experienceRequirements = experienceRequirements;
+    }
+
+    public int getMinsalary() {
+        return minsalary;
+    }
+
+    public void setMinsalary(int minsalary) {
+        this.minsalary = minsalary;
+    }
+
+    public int getMaxsalary() {
+        return maxsalary;
+    }
+
+    public void setMaxsalary(int maxsalary) {
+        this.maxsalary = maxsalary;
     }
 }

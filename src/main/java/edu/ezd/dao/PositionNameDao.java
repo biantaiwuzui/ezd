@@ -10,4 +10,6 @@ import java.util.List;
 public interface PositionNameDao {
 
     List<PositionName> getPositionName(int industry_id);
+
+    PositionName getOne(int positionNameId);
 }

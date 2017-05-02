@@ -25,5 +25,12 @@
         FROM ezd_PositionName
         WHERE industry_Name = #{industry_Name}
     </select>
+    <select id="getOne" parameterType="int" resultType="positionName">
+        SELECT
+        PositionNameId,
+        pname
+        FROM ezd_PositionName
+        WHERE PositionNameId = #{positionNameId}
+    </select>
 
 </mapper>

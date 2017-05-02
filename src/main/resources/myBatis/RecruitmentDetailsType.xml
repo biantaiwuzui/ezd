@@ -21,6 +21,13 @@
           recruitmentDetailsTypeName
         FROM ezd_recruitmentDetailsType
     </select>
+    <select id="getOne" parameterType="int" resultType="recruitmentDetailsType">
+        SELECT
+          recruitmentDetailsTypeId,
+          recruitmentDetailsTypeName
+        FROM ezd_recruitmentDetailsType
+        where recruitmentDetailsTypeId = #{recruitmentDetailsTypeId}
+    </select>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="recruitmentDetailsTypeId" parameterType="RecruitmentDetailsType">
         INSERT INTO ezd_recruitmentDetailsType(recruitmentDetailsTypeName)

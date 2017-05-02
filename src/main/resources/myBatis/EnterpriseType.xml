@@ -21,4 +21,12 @@
         FROM ezd_enterpriseType;
     </select>
 
+    <select id="getEnterpriseType"  parameterType="int" resultType="enterpriseType">
+        SELECT
+            enterpriseTypeID,
+            enterpriseTypeName
+        FROM ezd_enterpriseType
+        where enterpriseTypeID = #{enterpriseTypeID}
+    </select>
+
 </mapper>
