@@ -9,9 +9,14 @@
     <resultMap id="theAttractionApplicant" type="TheAttractionApplicant">
         <!-- 用id属性来映射主键字段 -->
         <id property="applicantId" column="applicantId"></id>
+        <result property="theAttractionId" column="theAttraction"></result>
+        <result property="applicant" column="applicant"></result>
         <!-- 一对一关联 -->
         <association property="theAttraction"  resultMap="edu.ezd.dao.TheAttractionDao.theAttraction"></association>
         <association property="users"  resultMap="edu.ezd.dao.UsersDao.users"></association>
     </resultMap>
 
+    <select id="gettheAttractionApplicant" resultType="theAttractionApplicant">
+        SELECT * FROM ezd.ezd_theattractionapplicant WHERE theAttraction = #{theAttractionId}
+    </select>
 </mapper>

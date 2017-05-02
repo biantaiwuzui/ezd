@@ -156,14 +156,13 @@ CREATE TABLE ezd_theAttraction(									-- 大招会表
 	starttime DATETIME DEFAULT CURRENT_TIMESTAMP, 		-- 开始时间
 	contentBytheAttraction VARCHAR(300),					-- 大招会得内容或介绍
 	venue VARCHAR(30),										-- 举办地址
-	endTime DATETIME ,								-- 结束时间
-	applicant INT REFERENCES ezd_Users (userId)					-- 报名者
+	endTime DATETIME 								-- 结束时间
 );
 -- 新增加  关联(ezd_Users和ezd_theAttraction)
 CREATE TABLE ezd_theAttractionApplicant(
-	applicantId INT PRIMARY KEY AUTO_INCREMENT,
-	applicant int REFERENCES ezd_Users (userId),
-	theAttraction int REFERENCES ezd_theAttraction (theAttractionId)
+	applicantId INT PRIMARY KEY AUTO_INCREMENT,			
+	applicant int REFERENCES ezd_Users (userId),			-- 报名者
+	theAttraction int REFERENCES ezd_theAttraction (theAttractionId)	-- 报名的大招会
 );
 
 -- 在岗位表新增一个岗位名称（关联PositionName表）

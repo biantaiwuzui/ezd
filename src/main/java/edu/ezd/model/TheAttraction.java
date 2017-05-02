@@ -1,5 +1,8 @@
 package edu.ezd.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,21 +11,24 @@ import java.util.List;
  * Created by JayJay on 2017/4/7.
  */
 public class TheAttraction {
-    private int theAttracionId;
+    private int id;
     private String title;   //主标题
     private String theAttractionImg;    //图片
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime; //开始时间
     private String contentBytheAttraction;  //大招会内容
     private String venue;   //举办地址
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;   //结束时间
+    private int status;
     private List<TheAttractionApplicant> theAttractionApplicants;
 
-    public int getTheAttracionId() {
-        return theAttracionId;
+    public int getId() {
+        return id;
     }
 
-    public void setTheAttracionId(int theAttracionId) {
-        this.theAttracionId = theAttracionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -73,6 +79,13 @@ public class TheAttraction {
         this.endTime = endTime;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public List<TheAttractionApplicant> getTheAttractionApplicants() {
         return theAttractionApplicants;
@@ -81,6 +94,4 @@ public class TheAttraction {
     public void setTheAttractionApplicants(List<TheAttractionApplicant> theAttractionApplicants) {
         this.theAttractionApplicants = theAttractionApplicants;
     }
-
-
 }

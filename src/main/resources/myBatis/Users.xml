@@ -28,4 +28,7 @@
 
     </resultMap>
 
+    <select id="getUser" resultType="users">
+        SELECT  * FROM ezd.ezd_users WHERE userid = #{userId}
+    </select>
 </mapper>

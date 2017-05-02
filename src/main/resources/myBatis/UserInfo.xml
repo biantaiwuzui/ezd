@@ -24,4 +24,7 @@
         <collection property="resumes" resultMap="edu.ezd.dao.ResumeDao.resume" ></collection>
     </resultMap>
 
+    <select id="getUserInfo" resultType="userInfo">
+        SELECT * FROM ezd.ezd_userinfo WHERE userId = #{id}
+    </select>
 </mapper>

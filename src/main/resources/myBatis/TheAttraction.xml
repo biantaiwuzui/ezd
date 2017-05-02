@@ -8,16 +8,54 @@
 
     <resultMap id="theAttraction" type="TheAttraction">
         <!-- 用id属性来映射主键字段 -->
-        <id property="theAttracionId" column="theAttracionId"></id>
+        <id property="id" column="theAttractionId"></id>
         <!-- 用result属性来映射非主键字段 -->
         <result property="title" column="title" />
         <result property="theAttractionImg" column="theAttractionImg" />
         <result property="startTime" column="startTime" />
         <result property="contentBytheAttraction" column="contentBytheAttraction" />
         <result property="venue" column="venue" />
-        <result property="endTime" column="endTime" />
+        <result property="endTime" column="endTime"  />
+        <result property="status" column="status" />
         <!--  一对多关联 -->
-        <collection property="theAttractionApplicants" resultMap="edu.ezd.dao.TheAttractionApplicantDao.theAttractionApplicant" ></collection>
+        <!--<collection property="theAttractionApplicants" resultMap="edu.ezd.dao.TheAttractionApplicantDao.theAttractionApplicant" ></collection>-->
     </resultMap>
 
+    <!-- 查询所有的大招会-->
+    <select id="findAll" resultMap="theAttraction">
+        SELECT
+          *
+        FROM  ezd_theAttraction
+        where status != 2
+    </select>
+
+    <!-- 根据id查询大招会的详请-->
+    <select id="getById" resultMap="theAttraction">
+        SELECT
+        *
+        FROM  ezd_theAttraction
+        WHERE theAttractionId = #{id}
+    </select>
+
+    <insert id="save" parameterType="theAttraction">
+        INSERT INTO
+          ezd_theattraction
+            ( title,
+              theAttractionImg,
+              contentBytheAttraction,
+              venue,
+              endTime)
+        VALUES (#{Title},
+                #{theAttractionImg},
+                #{contentBytheAttraction},
+                #{venue},
+                #{endTime})
+    </insert>
+
+    <!-- 修改数据的状态来对数据进行删除操作。2：删除，默认为0 显示 -->
+    <update id="update" parameterType="theAttraction">
+        update ezd_theattraction
+        SET status = #{status}
+        WHERE theAttractionId = #{id}
+    </update>
 </mapper>
