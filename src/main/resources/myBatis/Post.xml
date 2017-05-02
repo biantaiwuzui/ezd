@@ -27,9 +27,25 @@
     </resultMap>
 
 
-    <select id="findAll" resultType="post">
+    <select id="getAll" resultType="post">
+        SELECT
+        p.postId,
+        post_title,
+        sendPostDate,
+        contacts,
+        contactInformation,
+        recruitmentNumber,
+        position_name positionNameId,
+        company enterpriseid,
+        status
+        FROM
+        ezd_post p
+        WHERE  status = 0
+    </select>
+
+    <select id="findAll" parameterType="int" resultType="post">
           SELECT
-           postId,
+           p.postId,
            post_title,
            sendPostDate,
            contacts,
@@ -39,8 +55,10 @@
            company enterpriseid,
            status
         FROM
-            ezd_post
-        WHERE  status = 0
+            ezd_post p
+        JOIN ezd.ezd_recruitmentdetails r ON p.postId = r.postId
+        WHERE  status = 0 and r.JobType = #{jobType}
+
     </select>
     <!-- 查看详情 -->
     <select id="getPostInfo" parameterType="int" resultType="post">
@@ -61,22 +79,22 @@
     <!-- 根据企业id查询 -->
     <select id="getEnterprisePost" parameterType="int" resultType="post">
         SELECT
-           postId,
-           post_title,
-           sendPostDate,
-           contacts,
-           contactInformation,
-           recruitmentNumber,
-           position_name positionNameId,
-           company enterpriseid,
-           status
+            p.postId,
+            p.post_title,
+            p.sendPostDate,
+            p.contacts,
+            p.contactInformation,
+            p.recruitmentNumber,
+            p.position_name positionNameId,
+            p.company enterpriseid,
+            p.status
         FROM
-            ezd_post
+            ezd_post p
 		WHERE company = #{enterpriseid} and  status = 0
     </select>
 
     <!-- 根据地址查找 -->
-    <select id="getAddressPost" parameterType="String" resultType="post">
+    <select id="getAddressPost"  resultType="post">
         select
             p.postId,
             p.post_title,
@@ -90,13 +108,14 @@
         from ezd.ezd_post p
         join ezd.ezd_enterprise e
         on p.company = e.enterpriseId
-        WHERE e.enterpriseAddress  like concat(concat('%',#{address}),'%')
+        JOIN ezd.ezd_recruitmentdetails r ON p.postId = r.postId
+        WHERE e.enterpriseAddress  like concat(concat('%',#{0}),'%') and r.JobType = #{1}
 
     </select>
 
 
     <!-- 根据地工资查找 -->
-    <select id="getSalaryPost" parameterType="double" resultType="post">
+    <select id="getSalaryPost" resultType="post">
         SELECT
             p.postId,
             p.post_title,
@@ -113,11 +132,12 @@
         WHERE
         r.minsalary &gt;= #{0}
         AND r.maxsalry &lt;= #{1}
+        and r.JobType = #{2}
 
     </select>
 
     <!-- 排序查找 -->
-    <select id="getDescPost" parameterType="String" resultType="post">
+    <select id="getDescPost"  resultType="post">
         <if test="desc =='最新发布' ">
             select
                 postId,
@@ -130,37 +150,42 @@
                 company enterpriseid,
                 status
             from ezd.ezd_post
+            JOIN ezd_recruitmentdetails r ON p.postId = r.postId
             order by sendPostDate desc
+            WHERE r.JobType = #{jobType}
         </if>
         <if test="desc == '查看最多' ">
             SELECT
-                p.postId,
-                p.post_title,
-                p.sendPostDate,
-                p.contacts,
-                p.contactInformation,
-                p.recruitmentNumber,
-                p.position_name positionNameId,
-                p.company enterpriseid,
-                p.status
+            p.postId,
+            p.post_title,
+            p.sendPostDate,
+            p.contacts,
+            p.contactInformation,
+            p.recruitmentNumber,
+            p.position_name positionNameId,
+            p.company enterpriseid,
+            p. STATUS
             FROM
-                ezd_post p,
+            ezd_post p,
             (
             SELECT
-                p.postId,
-                count(*) look
+            p.postId,
+            count(*) look
             FROM
-                ezd_post p,
-                ezd_postbrowse pb
+            ezd_post p,
+            ezd_postbrowse pb,
+            ezd_recruitmentdetails r
             WHERE
-                p.postId = pb.postId
+            p.postId = pb.postId
+            AND p.postId = r.postId
+            AND r.JobType = #{jobType}
             GROUP BY
-                p.postId
+            p.postId
             ) looks
             WHERE
-                p.postId = looks.postId
+            p.postId = looks.postId
             ORDER BY
-                looks.look DESC;
+            looks.look DESC;
         </if>
     </select>
 

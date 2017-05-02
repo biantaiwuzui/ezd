@@ -38,7 +38,7 @@
     $(document).ready(function () {
        $.ajax({
            type: "get",
-           url:"${pageContext.request.contextPath}/post/findAll",
+           url:"${pageContext.request.contextPath}/post/internship/findAll",
            dataType: "json",
            success:function (data) {
                var str = "";

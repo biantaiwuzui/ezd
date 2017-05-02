@@ -29,8 +29,8 @@ public class PostService {
     @Resource
     private PositionNameDao positionNameDao;
 
-    public List<Post> findAll(){
-        List<Post> posts = postDao.findAll();
+    public List<Post> getAll(){
+        List<Post> posts = postDao.getAll();
         for (Post p : posts){
             Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
             RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
@@ -43,8 +43,8 @@ public class PostService {
         return posts;
     }
 
-    public List<Post> addressPost(String address){
-        List<Post> posts = postDao.getAddressPost(address);
+    public List<Post> findAll(int jobType){
+        List<Post> posts = postDao.findAll(jobType);
         for (Post p : posts){
             Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
             RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
@@ -57,8 +57,8 @@ public class PostService {
         return posts;
     }
 
-    public List<Post> descPost(String desc){
-        List<Post> posts = postDao.getDescPost(desc);
+    public List<Post> addressPost(String address,int jobType){
+        List<Post> posts = postDao.getAddressPost(address,jobType);
         for (Post p : posts){
             Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
             RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
@@ -71,8 +71,22 @@ public class PostService {
         return posts;
     }
 
-    public List<Post> salaryPost(double minsalary,double maxsalary){
-        List<Post> posts = postDao.getSalaryPost(minsalary,maxsalary);
+    public List<Post> descPost(String desc,int jobType){
+        List<Post> posts = postDao.getDescPost(desc,jobType);
+        for (Post p : posts){
+            Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
+            RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());
+            List<PostBrowse> postBrowses = postBrowseDao.getSome(p.getPostId());
+            p.setEnterprise(enterprise);
+            p.setRecruitmentDetails(recruitmentDetails);
+            p.setPostBrowses(postBrowses);
+
+        }
+        return posts;
+    }
+
+    public List<Post> salaryPost(double minsalary,double maxsalary,int jobType){
+        List<Post> posts = postDao.getSalaryPost(minsalary,maxsalary,jobType);
         for (Post p : posts){
             Enterprise enterprise = enterpriseDao.getEnterprise(p.getEnterpriseId());
             RecruitmentDetails recruitmentDetails = recruitmentDetailsDao.getRecruitmentDetails(p.getPostId());

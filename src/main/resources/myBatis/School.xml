@@ -12,7 +12,6 @@
         <!-- 用result属性来映射非主键字段 -->
         <result property="schoolName" column="schoolName" />
         <result property="schoolAddress" column="schoolAddress" />
-        <result property="schert_detail" column="schert_detail" />
         <result property="schoolCount" column="schoolCount" />
         <!-- 一对一关联 -->
         <association property="schoolType"  resultMap="edu.ezd.dao.SchoolTypeDao.schoolType"></association>

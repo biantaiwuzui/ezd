@@ -10,15 +10,16 @@ import java.util.List;
  */
 public interface PostDao {
 
-    List<Post> findAll();
+    List<Post> findAll(int jobType);
+    List<Post> getAll();
 
     Post getPostInfo(int postId);
 
     List<Post> getEnterprisePost(int enterpriseid);
 
-    List<Post> getAddressPost(String address);
+    List<Post> getAddressPost(String address,int jobType);
 
-    List<Post> getSalaryPost(double minSalary,double maxSalary);
+    List<Post> getSalaryPost(double minSalary,double maxSalary,int jobType);
 
-    List<Post> getDescPost(@Param(value="desc") String desc);
+    List<Post> getDescPost(@Param(value="desc") String desc,int jobType);
 }

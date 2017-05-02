@@ -1,10 +1,8 @@
 package edu.ezd.control.app;
 
-import com.google.gson.Gson;
 import edu.ezd.model.Post;
 import edu.ezd.service.PostService;
 import edu.ezd.util.GsonUtil;
-import edu.ezd.util.JsonUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +17,10 @@ import java.util.List;
  * Created by JayJay on 2017/4/24.
  */
 @Controller
-@RequestMapping("/post")
-public class PostControler {
+@RequestMapping("/post/internship")
+public class Post_InternshipControler {
     private final  Logger log = Logger.getLogger(this.getClass());
-    private final int jobType = 2;
+    private final int jobType = 1;
     @Resource
     private PostService postService;
 
@@ -34,15 +32,6 @@ public class PostControler {
     @GetMapping("/postinfo")
     public String postInfo(){
         return "post/postinfo";
-    }
-
-    @GetMapping(value = "/getAll", produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public String getAll(){
-        List<Post> posts = postService.getAll();
-        String json = GsonUtil.toJson(posts);
-        log.info(json);
-        return json;
     }
 
     /**

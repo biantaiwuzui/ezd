@@ -8,7 +8,6 @@ public class School {
     private int schoolId;
     private String schoolName;  //学校名称
     private String schoolAddress;   //学校地址
-    private String schert_detail;   //校招会详情
     private int schoolCount;    //校招会常熟
     private SchoolType schoolType;  //学校类型
 
@@ -36,13 +35,6 @@ public class School {
         this.schoolAddress = schoolAddress;
     }
 
-    public String getSchert_detail() {
-        return schert_detail;
-    }
-
-    public void setSchert_detail(String schert_detail) {
-        this.schert_detail = schert_detail;
-    }
 
     public int getSchoolCount() {
         return schoolCount;
